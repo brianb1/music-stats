@@ -1,0 +1,12 @@
+{
+  "name": "lastfm-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "author": "James Vaughan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "request": "^2.69.0"
+  }
+}
