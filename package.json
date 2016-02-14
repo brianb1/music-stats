@@ -1,8 +1,14 @@
 {
   "name": "lastfm-test",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Stats about James' music listening history.",
+  "scripts": {
+	"start": "node app.js"
+  },
+  "repository": {
+	"type": "git",
+	"url": "git+https://github.com/jamesbvaughan/lastfm-experiments.git"
+  },
   "author": "James Vaughan",
   "license": "ISC",
   "dependencies": {
