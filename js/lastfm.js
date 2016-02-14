@@ -8,6 +8,21 @@ module.exports = function (data) {
 	return {
 		user: data.user,
 		apiKey: data.apiKey,
+		getRecentTracks: function (songLimit, pageNum, callback) {
+			url = baseURL + qs.stringify({
+				method: 'user.getRecentTracks',
+				limit: songLimit,
+				page: pageNum,
+				user: this.user,
+				api_key: this.apiKey,
+				format: 'json'
+			});
+			request(url, function (err, response, body) {
+				data = JSON.parse(body);
+				tracks = data.recenttracks.track;
+				callback(tracks);
+			});
+		},
 		getWeeklyChartList: function (callback) {
 			url = baseURL + qs.stringify({
 				method: 'user.getWeeklyChartList',
