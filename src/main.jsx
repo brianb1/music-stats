@@ -2,9 +2,9 @@
 require('./normalize.css');
 require('./skeleton.css');
 require('./styles.less');
-var $ = require('jquery');
 var React = require('react');
 var ReactDOM = require('react-dom');
+var Waypoint = require('react-waypoint');
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var browserHistory = require('react-router').browserHistory;
@@ -134,17 +134,23 @@ var TrackList = React.createClass({
 		};
 	},
 	componentDidMount: function () {
-		this.loadTracks();
+		this.loadTracks(20);
 	},
-	loadTracks: function () {
+	loadTracks: function (nTracks) {
 		this.trackRequest = $.get('api/recentTracks', {
-			page: this.state.page
+			page: this.state.page,
+			ntracks: nTracks
 		}, function (result) {
 			this.setState({
 				tracks: this.state.tracks.concat(result),
 				page: this.state.page + 1
 			});
 		}.bind(this));
+	},
+	loadMore: function () {
+		var n = this.state.tracks.length;
+		if (n == 0) return;
+		this.loadTracks(n < 200 ? n : 200);
 	},
 	componentWillUnmount: function () {
 		this.trackRequest.abort();
@@ -160,8 +166,9 @@ var TrackList = React.createClass({
 			<div className="trackList">
 				<SectionTitle>Recent Tracks</SectionTitle>
 				{tracks}
+				<Waypoint onEnter={this.loadMore} />
 				<div className="button-wrapper">
-					<button onClick={this.loadTracks}>Load More</button>
+					<button onClick={this.loadMore}>Load More</button>
 				</div>
 			</div>
 		);
