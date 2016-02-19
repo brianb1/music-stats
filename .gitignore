@@ -2,4 +2,3 @@
 node_modules
 helpers
 .jshintrc
-public/bundle.js
