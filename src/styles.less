@@ -1,9 +1,13 @@
-.center {
-	text-align: center;
-}
+// Utilities
+.center { text-align: center; }
 
-.my-spinner {
-	margin: 10px;
+.active { text-decoration: underline; }
+
+
+// General
+#app {
+	margin-top: 5%;
+	margin-bottom: 5%;
 }
 
 nav a {
@@ -18,14 +22,7 @@ nav a {
 
 a, a:hover {
 	color: inherit;
-}
-
-.trackList a {
 	text-decoration: none;
-}
-
-.active {
-	text-decoration: underline;
 }
 
 .section-header {
@@ -35,6 +32,14 @@ a, a:hover {
 	letter-spacing: .2rem;
 }
 
+
+// About Page
+.about {
+	a { text-decoration: underline; }
+}
+
+
+// Recent Tracks Page
 .track {
 	display: flex;
 	justify-content: space-between;
@@ -46,11 +51,4 @@ a, a:hover {
 		margin-bottom: 0px;
 		padding-left: 10px;
 	}
-}
-
-.button-wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding-top: 20px;
 }

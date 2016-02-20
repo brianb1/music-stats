@@ -3,7 +3,7 @@ var React = require('react');
 module.exports = React.createClass({
 	render: function () {
 		return (
-			<div>
+			<div className="about">
 				<h6 className="section-header">What is this?</h6>
 				<p>Have you ever wondered what music I'm listening to? Up until now, your options would have been pretty slim. You could have checked <a href="http://last.fm/user/magicjamesv" target="_blank">my last.fm profile</a>, <a href="http://jamesbvaughan.com" target="_blank">my main website</a>, or <a href="http://twitter.com/magicjamesmusic" target="_blank">@magicjamesmusic on Twitter</a>.</p>
 				<p>Alright, you're probably thinking, "What is this guy talking about? I couldn't care less what music he's listening to! And publicizing his music history on that many different websites is kind of excessive." Okay, maybe that is a bit much, but I think that music sharing is really cool and building websites is even cooler, so this site's existence was really inevitable. My main motivation for creating it was to give me a project to learn a few new web technologies that I had been wanting to play around with.</p>

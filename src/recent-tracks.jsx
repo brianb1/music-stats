@@ -1,3 +1,4 @@
+"use strict";
 var React = require('react');
 var Waypoint = require('react-waypoint');
 var Spinner = require('react-spin');
@@ -9,7 +10,7 @@ module.exports = React.createClass({
 				<NowPlaying />
 				<hr />
 				<TrackList />
-				<hr />
+				<br />
 			</div>
 		);
 	}
@@ -18,14 +19,7 @@ module.exports = React.createClass({
 var NowPlaying = React.createClass({
 	getInitialState: function () {
 		return {
-			track: {
-				title: '',
-				artist: '',
-				album: '',
-				cover: '',
-				url: '',
-				playing: false
-			}
+			track: {}
 		};
 	},
 	componentDidMount: function () {
@@ -86,23 +80,26 @@ var TrackList = React.createClass({
 		}.bind(this));
 	},
 	loadMore: function () {
-		var n = this.state.tracks.length;
+		let n = this.state.tracks.length;
 		if (n != 0) this.loadTracks(n < 200 ? n : 200);
 	},
 	componentWillUnmount: function () {
 		this.trackRequest.abort();
 	},
 	render: function () {
-		var tracks= [];
+		let tracks= [];
 		this.state.tracks.forEach(function (track, key) {
 			tracks.push(
 				<Track key={key} track={track} />
 			);
 		});
-		var spinOptions = {
+		let spinOptions = {
 			className: 'my-spinner',
 			position: 'relative',
-			opacity: 0.1
+			top: '20px',
+			color: '#666',
+			width: 1.5,
+			length: 12
 		};
 		return (
 			<div className="trackList">
@@ -110,10 +107,8 @@ var TrackList = React.createClass({
 				<div className="tracks">
 					{tracks}
 				</div>
-				<div className="button-wrapper">
-					<Spinner config={spinOptions} stopped={!this.state.loading} />
-					<Waypoint onEnter={this.loadMore} />
-				</div>
+				<Waypoint onEnter={this.loadMore} />
+				<Spinner config={spinOptions} stopped={!this.state.loading} />
 			</div>
 		);
 	}

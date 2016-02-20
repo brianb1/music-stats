@@ -1,3 +1,4 @@
+"use strict";
 var path = require('path');
 
 // Last.fm ======================================================
@@ -14,7 +15,7 @@ var app = express();
 app.use(compression());
 app.get('/api/nowPlaying', function (req, res) {
 	lf.getRecentTracks(1, 1, function (tracks) {
-		var track = tracks[0];
+		let track = tracks[0];
 		res.send({
 			artist: track.artist['#text'],
 			title: track.name,
@@ -27,10 +28,10 @@ app.get('/api/nowPlaying', function (req, res) {
 	});
 });
 app.get('/api/recentTracks', function (req, res) {
-	var page = req.query.page || 1;
-	var nTracks = req.query.ntracks || 10;
+	let page = req.query.page || 1;
+	let nTracks = req.query.ntracks || 10;
 	lf.getRecentTracks(nTracks, page, function (tracks) {
-		trackList = tracks.slice(1).map(function (track) {
+		let trackList = tracks.slice(1).map(function (track) {
 			return {
 				artist: track.artist['#text'],
 				title: track.name,
@@ -53,7 +54,7 @@ app.get('/recentTracks', sendApp);
 
 app.set("port", process.env.PORT || 3000);
 app.listen(app.get("port"), function () {
-	console.log("Server up and running on port", app.get("port") + "!");
+	console.log(`Server up and running on port ${app.get('port')}!`);
 });
 
 // Webpack ======================================================

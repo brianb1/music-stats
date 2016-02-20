@@ -24,7 +24,7 @@ var App = React.createClass({
 			<div>
 				<div className="u-max-full-width center">
 					<h1>Music Stats</h1>
-					<h5>by James Vaughan</h5>
+					<h5>by <a href="http://jamesbvaughan.com" target="_blank">James Vaughan</a></h5>
 				</div>
 				<hr style={{marginBottom: '0px'}} />
 				<nav className="navBar">

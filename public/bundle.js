@@ -82,7 +82,12 @@
 					React.createElement(
 						'h5',
 						null,
-						'by James Vaughan'
+						'by ',
+						React.createElement(
+							'a',
+							{ href: 'http://jamesbvaughan.com', target: '_blank' },
+							'James Vaughan'
+						)
 					)
 				),
 				React.createElement('hr', { style: { marginBottom: '0px' } }),
@@ -158,7 +163,7 @@
 
 
 	// module
-	exports.push([module.id, ".center {\n  text-align: center;\n}\n.my-spinner {\n  margin: 10px;\n}\nnav a {\n  text-transform: uppercase;\n  font-size: 11px;\n  font-weight: 600;\n  letter-spacing: .2rem;\n  margin-right: 35px;\n  line-height: 6.5rem;\n  text-decoration: none;\n}\na,\na:hover {\n  color: inherit;\n}\n.trackList a {\n  text-decoration: none;\n}\n.active {\n  text-decoration: underline;\n}\n.section-header {\n  text-transform: uppercase;\n  font-weight: 600;\n  font-size: 1.4rem;\n  letter-spacing: .2rem;\n}\n.track {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 10px;\n  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);\n  min-height: 64px;\n}\n.track h5 {\n  margin-bottom: 0px;\n  padding-left: 10px;\n}\n.button-wrapper {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding-top: 20px;\n}\n", ""]);
+	exports.push([module.id, ".center {\n  text-align: center;\n}\n.active {\n  text-decoration: underline;\n}\n#app {\n  margin-top: 5%;\n  margin-bottom: 5%;\n}\nnav a {\n  text-transform: uppercase;\n  font-size: 11px;\n  font-weight: 600;\n  letter-spacing: .2rem;\n  margin-right: 35px;\n  line-height: 6.5rem;\n  text-decoration: none;\n}\na,\na:hover {\n  color: inherit;\n  text-decoration: none;\n}\n.section-header {\n  text-transform: uppercase;\n  font-weight: 600;\n  font-size: 1.4rem;\n  letter-spacing: .2rem;\n}\n.about a {\n  text-decoration: underline;\n}\n.track {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 10px;\n  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);\n  min-height: 64px;\n}\n.track h5 {\n  margin-bottom: 0px;\n  padding-left: 10px;\n}\n", ""]);
 
 	// exports
 
@@ -25341,7 +25346,7 @@
 		render: function () {
 			return React.createElement(
 				"div",
-				null,
+				{ className: "about" },
 				React.createElement(
 					"h6",
 					{ className: "section-header" },
@@ -25433,6 +25438,8 @@
 /* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
 	var React = __webpack_require__(5);
 	var Waypoint = __webpack_require__(223);
 	var Spinner = __webpack_require__(224);
@@ -25447,7 +25454,7 @@
 				React.createElement(NowPlaying, null),
 				React.createElement('hr', null),
 				React.createElement(TrackList, null),
-				React.createElement('hr', null)
+				React.createElement('br', null)
 			);
 		}
 	});
@@ -25457,14 +25464,7 @@
 
 		getInitialState: function () {
 			return {
-				track: {
-					title: '',
-					artist: '',
-					album: '',
-					cover: '',
-					url: '',
-					playing: false
-				}
+				track: {}
 			};
 		},
 		componentDidMount: function () {
@@ -25547,21 +25547,24 @@
 			}.bind(this));
 		},
 		loadMore: function () {
-			var n = this.state.tracks.length;
+			let n = this.state.tracks.length;
 			if (n != 0) this.loadTracks(n < 200 ? n : 200);
 		},
 		componentWillUnmount: function () {
 			this.trackRequest.abort();
 		},
 		render: function () {
-			var tracks = [];
+			let tracks = [];
 			this.state.tracks.forEach(function (track, key) {
 				tracks.push(React.createElement(Track, { key: key, track: track }));
 			});
-			var spinOptions = {
+			let spinOptions = {
 				className: 'my-spinner',
 				position: 'relative',
-				opacity: 0.1
+				top: '20px',
+				color: '#666',
+				width: 1.5,
+				length: 12
 			};
 			return React.createElement(
 				'div',
@@ -25576,12 +25579,8 @@
 					{ className: 'tracks' },
 					tracks
 				),
-				React.createElement(
-					'div',
-					{ className: 'button-wrapper' },
-					React.createElement(Spinner, { config: spinOptions, stopped: !this.state.loading }),
-					React.createElement(Waypoint, { onEnter: this.loadMore })
-				)
+				React.createElement(Waypoint, { onEnter: this.loadMore }),
+				React.createElement(Spinner, { config: spinOptions, stopped: !this.state.loading })
 			);
 		}
 	});
