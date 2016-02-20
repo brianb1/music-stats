@@ -1,4 +1,7 @@
+// James' Music Stats Server
 "use strict";
+
+// Imports ======================================================
 var path = require('path');
 
 // Last.fm ======================================================
@@ -13,8 +16,8 @@ var express = require('express');
 var compression = require('compression');
 var app = express();
 app.use(compression());
-app.get('/api/nowPlaying', function (req, res) {
-	lf.getRecentTracks(1, 1, function (tracks) {
+app.get('/api/nowPlaying', (req, res) => {
+	lf.getRecentTracks(1, 1, tracks => {
 		let track = tracks[0];
 		res.send({
 			artist: track.artist['#text'],
@@ -27,11 +30,11 @@ app.get('/api/nowPlaying', function (req, res) {
 		});
 	});
 });
-app.get('/api/recentTracks', function (req, res) {
+app.get('/api/recentTracks', (req, res) => {
 	let page = req.query.page || 1;
 	let nTracks = req.query.ntracks || 10;
-	lf.getRecentTracks(nTracks, page, function (tracks) {
-		let trackList = tracks.slice(1).map(function (track) {
+	lf.getRecentTracks(nTracks, page, tracks => {
+		let trackList = tracks.slice(1).map(track => {
 			return {
 				artist: track.artist['#text'],
 				title: track.name,
@@ -53,7 +56,7 @@ app.get('/stats', sendApp);
 app.get('/recentTracks', sendApp);
 
 app.set("port", process.env.PORT || 3000);
-app.listen(app.get("port"), function () {
+app.listen(app.get("port"), () => {
 	console.log(`Server up and running on port ${app.get('port')}!`);
 });
 
@@ -63,7 +66,7 @@ var compiler = webpack(require(path.resolve(__dirname, 'webpack.config.js')));
 compiler.watch({
 	aggregateTimeout: 300,
 	poll: true
-}, function (err, stats) {
+}, (err, stats) => {
 	if (err) {
 		console.error(err);
 	} else {

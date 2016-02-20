@@ -27,7 +27,7 @@ var App = React.createClass({
 					<Link activeClassName="active" to="/stats">Stats</Link>
 					<Link activeClassName="active" to="/about">About</Link>
 				</nav>
-				<hr style={{marginTop: '0px'}} />
+				<hr style={{marginTop: '0'}} />
 				{this.props.children}
 			</div>
 		);

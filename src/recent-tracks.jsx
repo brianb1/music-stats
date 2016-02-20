@@ -23,11 +23,11 @@ var NowPlaying = React.createClass({
 		};
 	},
 	componentDidMount: function () {
-		this.trackRequest = $.get('api/nowPlaying', function (result) {
+		this.trackRequest = $.get('api/nowPlaying', (result) => {
 			this.setState({
 				track: result
 			});
-		}.bind(this));
+		});
 	},
 	componentWillUnmount: function () {
 		this.trackRequest.abort();
@@ -40,7 +40,7 @@ var NowPlaying = React.createClass({
 				</h6>
 				<div className="row">
 					<div className="nine columns">
-						<h4 style={{marginBottom: '10px'}}>{this.state.track.title}</h4>
+						<h4 style={{marginBottom: '10'}}>{this.state.track.title}</h4>
 						<h5>
 							{this.state.track.artist} -
 							<i> {this.state.track.album}</i>
@@ -71,13 +71,13 @@ var TrackList = React.createClass({
 		this.trackRequest = $.get('api/recentTracks', {
 			page: this.state.page,
 			ntracks: nTracks
-		}, function (result) {
+		}, result => {
 			this.setState({
 				tracks: this.state.tracks.concat(result),
 				page: this.state.page + 1,
 				loading: false
 			});
-		}.bind(this));
+		});
 	},
 	loadMore: function () {
 		let n = this.state.tracks.length;
@@ -88,7 +88,7 @@ var TrackList = React.createClass({
 	},
 	render: function () {
 		let tracks= [];
-		this.state.tracks.forEach(function (track, key) {
+		this.state.tracks.forEach((track, key) => {
 			tracks.push(
 				<Track key={key} track={track} />
 			);

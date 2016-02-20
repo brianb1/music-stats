@@ -90,7 +90,7 @@
 						'About'
 					)
 				),
-				React.createElement('hr', { style: { marginTop: '0px' } }),
+				React.createElement('hr', { style: { marginTop: '0' } }),
 				this.props.children
 			);
 		}
@@ -25448,11 +25448,11 @@
 			};
 		},
 		componentDidMount: function () {
-			this.trackRequest = $.get('api/nowPlaying', function (result) {
+			this.trackRequest = $.get('api/nowPlaying', result => {
 				this.setState({
 					track: result
 				});
-			}.bind(this));
+			});
 		},
 		componentWillUnmount: function () {
 			this.trackRequest.abort();
@@ -25474,7 +25474,7 @@
 						{ className: 'nine columns' },
 						React.createElement(
 							'h4',
-							{ style: { marginBottom: '10px' } },
+							{ style: { marginBottom: '10' } },
 							this.state.track.title
 						),
 						React.createElement(
@@ -25518,13 +25518,13 @@
 			this.trackRequest = $.get('api/recentTracks', {
 				page: this.state.page,
 				ntracks: nTracks
-			}, function (result) {
+			}, result => {
 				this.setState({
 					tracks: this.state.tracks.concat(result),
 					page: this.state.page + 1,
 					loading: false
 				});
-			}.bind(this));
+			});
 		},
 		loadMore: function () {
 			let n = this.state.tracks.length;
@@ -25535,7 +25535,7 @@
 		},
 		render: function () {
 			let tracks = [];
-			this.state.tracks.forEach(function (track, key) {
+			this.state.tracks.forEach((track, key) => {
 				tracks.push(React.createElement(Track, { key: key, track: track }));
 			});
 			let spinOptions = {
