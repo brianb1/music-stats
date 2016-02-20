@@ -22,11 +22,6 @@ var App = React.createClass({
 	render: function () {
 		return (
 			<div>
-				<div className="u-max-full-width center">
-					<h1>Music Stats</h1>
-					<h5>by <a href="http://jamesbvaughan.com" target="_blank">James Vaughan</a></h5>
-				</div>
-				<hr style={{marginBottom: '0px'}} />
 				<nav className="navBar">
 					<IndexLink activeClassName="active" to="/">Recent Tracks</IndexLink>
 					<Link activeClassName="active" to="/stats">Stats</Link>
