@@ -30,10 +30,8 @@ app.get('/api/recentTracks', function (req, res) {
 	var page = req.query.page || 1;
 	var nTracks = req.query.ntracks || 10;
 	lf.getRecentTracks(nTracks, page, function (tracks) {
-		var index = nTracks * (page - 1);
 		trackList = tracks.slice(1).map(function (track) {
 			return {
-				key: index++,
 				artist: track.artist['#text'],
 				title: track.name,
 				album: track.album['#text'],
