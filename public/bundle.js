@@ -25560,7 +25560,8 @@
 			});
 			var spinOptions = {
 				className: 'my-spinner',
-				position: 'relative'
+				position: 'relative',
+				opacity: 0.1
 			};
 			return React.createElement(
 				'div',

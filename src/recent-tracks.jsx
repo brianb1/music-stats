@@ -101,7 +101,8 @@ var TrackList = React.createClass({
 		});
 		var spinOptions = {
 			className: 'my-spinner',
-			position: 'relative'
+			position: 'relative',
+			opacity: 0.1
 		};
 		return (
 			<div className="trackList">
