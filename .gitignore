@@ -3,3 +3,4 @@ node_modules
 helpers
 .jshintrc
 npm-debug.log
+.idea
