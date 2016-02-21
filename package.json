@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Stats about James' music listening history.",
   "scripts": {
-    "start": "node app.js"
+    "start": "node server.js"
   },
-  "main": "app.js",
+  "main": "server.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jamesbvaughan/lastfm-experiments.git"

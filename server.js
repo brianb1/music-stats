@@ -5,7 +5,7 @@
 var path = require('path');
 
 // Last.fm ======================================================
-var lastfm = require(path.join(__dirname, 'modules/lastfm.js'));
+var lastfm = require(path.join(__dirname, 'src/lastfm.js'));
 var lf = lastfm({
 	user: "magicjamesv",
 	apiKey: "9cec0534e60b827aab0ae1b3e91baf82"
