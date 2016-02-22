@@ -61,15 +61,17 @@ app.listen(app.get("port"), () => {
 });
 
 // Webpack ======================================================
-var webpack = require("webpack");
-var compiler = webpack(require(path.resolve(__dirname, 'webpack.config.js')));
-compiler.watch({
-	aggregateTimeout: 300,
-	poll: true
-}, (err, stats) => {
-	if (err) {
-		console.error(err);
-	} else {
-		console.log("Webpacked!");
-	}
-});
+if (process.env.NODE_ENV != "production") {
+	var webpack = require("webpack");
+	var compiler = webpack(require(path.resolve(__dirname, 'webpack.config.js')));
+	compiler.watch({
+		aggregateTimeout: 300,
+		poll: true
+	}, (err, stats) => {
+		if (err) {
+			console.error(err);
+		} else {
+			console.log("Webpacked!");
+		}
+	});
+}
