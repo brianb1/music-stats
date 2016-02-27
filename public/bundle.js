@@ -25601,7 +25601,7 @@
 		},
 		loadMore: function loadMore() {
 			var n = this.state.tracks.length;
-			if (n != 0) this.loadTracks(n < 200 ? n : 200);
+			if (n !== 0) this.loadTracks(n < 200 ? n : 200);
 		},
 		componentWillUnmount: function componentWillUnmount() {
 			this.trackRequest.abort();

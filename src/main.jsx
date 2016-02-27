@@ -4,19 +4,19 @@
 require('./styles.less');
 
 // NPM Modules
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Router = require('react-router').Router;
-var Route = require('react-router').Route;
-var browserHistory = require('react-router').browserHistory;
-var IndexRoute = require('react-router').IndexRoute;
-var Link = require('react-router').Link;
-var IndexLink = require('react-router').IndexLink;
+const React = require('react');
+const ReactDOM = require('react-dom');
+const Router = require('react-router').Router;
+const Route = require('react-router').Route;
+const browserHistory = require('react-router').browserHistory;
+const IndexRoute = require('react-router').IndexRoute;
+const Link = require('react-router').Link;
+const IndexLink = require('react-router').IndexLink;
 
 // My Components
-var About = require('./about.jsx');
-var Stats = require('./stats.jsx');
-var RecentTracks = require('./recent-tracks.jsx');
+const About = require('./about.jsx');
+const Stats = require('./stats.jsx');
+const RecentTracks = require('./recent-tracks.jsx');
 
 var App = React.createClass({
 	render: function () {

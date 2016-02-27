@@ -1,7 +1,7 @@
 "use strict";
-var React = require('react');
-var Waypoint = require('react-waypoint');
-var Spinner = require('react-spin');
+const React = require('react');
+const Waypoint = require('react-waypoint');
+const Spinner = require('react-spin');
 
 module.exports = React.createClass({
 	render: function () {
@@ -81,7 +81,7 @@ var TrackList = React.createClass({
 	},
 	loadMore: function () {
 		let n = this.state.tracks.length;
-		if (n != 0) this.loadTracks(n < 200 ? n : 200);
+		if (n !== 0) this.loadTracks(n < 200 ? n : 200);
 	},
 	componentWillUnmount: function () {
 		this.trackRequest.abort();
