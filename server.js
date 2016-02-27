@@ -2,18 +2,20 @@
 "use strict";
 
 // Imports ======================================================
-var path = require('path');
+const path = require('path');
+const dotenv = require('dotenv');
+dotenv.load();
 
 // Last.fm ======================================================
-var lastfm = require(path.join(__dirname, 'src/lastfm.js'));
-var lf = lastfm({
+const lastfm = require(path.join(__dirname, 'src/lastfm.js'));
+const lf = lastfm({
 	user: "magicjamesv",
-	apiKey: "9cec0534e60b827aab0ae1b3e91baf82"
+	apiKey: process.env.LASTFM_KEY
 });
 
 // Express ======================================================
-var express = require('express');
-var compression = require('compression');
+const express = require('express');
+const compression = require('compression');
 var app = express();
 app.use(compression());
 app.get('/api/nowPlaying', (req, res) => {
@@ -62,16 +64,12 @@ app.listen(app.get("port"), () => {
 
 // Webpack ======================================================
 if (process.env.NODE_ENV != "production") {
-	var webpack = require("webpack");
-	var compiler = webpack(require(path.resolve(__dirname, 'webpack.config.js')));
+	const webpack = require("webpack");
+	let compiler = webpack(require(path.resolve(__dirname, 'webpack.config.js')));
 	compiler.watch({
 		aggregateTimeout: 300,
 		poll: true
 	}, (err, stats) => {
-		if (err) {
-			console.error(err);
-		} else {
-			console.log("Webpacked!");
-		}
+		err && console.error(err) || console.log("Webpacked!");
 	});
 }
