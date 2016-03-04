@@ -70,6 +70,10 @@ if (process.env.NODE_ENV != "production") {
 		aggregateTimeout: 300,
 		poll: true
 	}, (err, stats) => {
-		err && console.error(err) || console.log("Webpacked!");
+		if (err) {
+			console.error(err);
+		} else {
+			console.log("Webpacked!");
+		}
 	});
 }
