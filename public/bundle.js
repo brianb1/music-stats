@@ -145,7 +145,7 @@
 
 
 	// module
-	exports.push([module.id, ".center {\n  text-align: center;\n}\n.active {\n  text-decoration: underline;\n}\n.content {\n  margin-top: 5%;\n  margin-bottom: 5%;\n}\nnav a {\n  text-transform: uppercase;\n  font-size: 11px;\n  font-weight: 600;\n  letter-spacing: .2rem;\n  margin-right: 35px;\n  line-height: 6.5rem;\n  text-decoration: none;\n}\na,\na:hover {\n  color: inherit;\n  text-decoration: none;\n}\n.section-header {\n  text-transform: uppercase;\n  font-weight: 600;\n  font-size: 1.4rem;\n  letter-spacing: .2rem;\n}\n.about a {\n  text-decoration: underline;\n}\n.track {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 10px;\n  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);\n  min-height: 64px;\n}\n.track h5 {\n  margin-bottom: 0px;\n  padding-left: 10px;\n}\n", ""]);
+	exports.push([module.id, ".center {\n  text-align: center;\n}\n.active,\n.active:hover {\n  text-decoration: underline;\n}\n.content {\n  margin-top: 5%;\n  margin-bottom: 5%;\n}\nnav a {\n  text-transform: uppercase;\n  font-size: 11px;\n  font-weight: 600;\n  letter-spacing: .2rem;\n  margin-right: 35px;\n  line-height: 6.5rem;\n  text-decoration: none;\n}\na,\na:hover {\n  color: inherit;\n  text-decoration: none;\n}\n.section-header {\n  text-transform: uppercase;\n  font-weight: 600;\n  font-size: 1.4rem;\n  letter-spacing: .2rem;\n}\n.about a {\n  text-decoration: underline;\n}\n.track {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 10px;\n  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);\n  min-height: 64px;\n}\n.track h5 {\n  margin-bottom: 0px;\n  padding-left: 10px;\n}\n", ""]);
 
 	// exports
 
