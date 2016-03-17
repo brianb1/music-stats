@@ -1,4 +1,9 @@
 // James' module for getting data from Last.FM
+//
+// Functions included:
+// 	getRecentTracks(songLimit, pageNum, callback)
+// 	getWeeklyChartList(callback)
+//	getWeeklyTrackChart(weeks, weekNum, callback)
 "use strict";
 
 const request = require('request');
