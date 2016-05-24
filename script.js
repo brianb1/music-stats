@@ -1,48 +1,60 @@
+// music-stats
+// by James Vaughan
+
+// Initial State
+const state = {
+  page: 1,
+  loading: false
+}
+
+// Functions
 const $ = selector => document.querySelector(selector)
 
-let page = 1
-let loading = false
+const url = (page, num) =>
+  `http://ws.audioscrobbler.com/2.0/?`
+    + `method=user.getRecentTracks`
+    + `&limit=${num}`
+    + `&page=${page}`
+    + `&user=magicjamesv`
+    + `&api_key=9cec0534e60b827aab0ae1b3e91baf82`
+    + `&format=json`
 
 const fetchTracks = (page, num, callback) =>
-  fetch(`http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&limit=${num}&page=${page}&user=magicjamesv&api_key=9cec0534e60b827aab0ae1b3e91baf82&format=json`)
+  fetch(url(page, num))
     .then(result => result.json())
-    .then(json => callback(json.recenttracks.track))
+    .then(json => json.recenttracks.track)
 
-const fetchRecentTracks = page =>
-  fetchTracks(page, 20, tracks => tracks.slice(1).forEach(track => {
+const fetchRecentTracks = page => fetchTracks(page, 20).then(tracks =>
+  tracks.slice(1).forEach(({url, name, artist, image}) => {
     $("#tracks").innerHTML += `
-      <a class="track" href=${track.url} target="_blank">
-        <h5>${track.name} by ${track.artist['#text']}</h5>
-        <img src=${track.image[track.image.length - 1]['#text']} />
+      <a class="track" href=${url} target="_blank">
+        <h5>${name} by ${artist['#text']}</h5>
+        <img src=${image[image.length > 1 ? 1 : 0]['#text']}>
       </a>`
-    loading = false
+    state.loading = false
   }))
 
-fetchRecentTracks(1)
 
-window.onscroll = () => {
-  if (!loading && (window.innerHeight + window.scrollY)
-      >= document.body.offsetHeight) {
-    loading = true
-    fetchRecentTracks(page++)
+// Script
+onscroll = () => {
+  if (!state.loading &&
+      (innerHeight + scrollY) >= document.body.offsetHeight) {
+    state.loading = true
+    fetchRecentTracks(state.page++)
   }
 }
 
-fetchTracks(1, 1, tracks =>
+fetchRecentTracks(1)
+
+fetchTracks(1, 1).then(([{name, artist, album, image}]) =>
   $("#now-playing").innerHTML = `
-    <h6 class="section-header">
-      ${tracks[0]['@attr'] === undefined ?
-        "Lastest Track Played" : "Now Playing"}
-    </h6>
-    <div class="row">
-      <div class="nine columns">
-        <h4 style="margin-bottom: 10">${tracks[0].name}</h4>
-        <h5 id="current-info">
-          ${tracks[0].artist['#text']} - <i>${tracks[0].album['#text']}</i>
-        </h5>
-      </div>
-      <div class="three columns">
-        <img src="${tracks[0].image[tracks[0].image.length - 1]['#text']}"
-          style="max-width: 100%; height: auto">
-      </div>
-  </div>`)
+    <div class="nine columns">
+      <h4 style="margin-bottom: 10">${name}</h4>
+      <h5 id="current-info">
+        ${artist['#text']} - <i>${album['#text']}</i>
+      </h5>
+    </div>
+    <div class="three columns">
+      <img src="${image[image.length - 1]['#text']}"
+        style="max-width: 100%; height: auto">
+    </div>`)
