@@ -9,9 +9,10 @@
 
 	<title>Music | James Vaughan</title>
 
-	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 	<link href="css/normalize.css" rel="stylesheet" type="text/css">
 	<link href="css/skeleton.css" rel="stylesheet" type="text/css">
+	<link href="css/styles.css" rel="stylesheet" type="text/css">
 	<link href="images/favicon.png" rel="icon" type="image/png">
 </head>
 <body>
@@ -20,10 +21,26 @@
 			<h1>Music Stats</h1>
 			<h5>by <a href="http://jamesbvaughan.com" target="_blank">James Vaughan</a></h5>
 		</div>
-		<hr style="margin-bottom: 0px" />
-		<div id="app"></div>
+		<hr class="no-margin-below">
+    <div>
+      <nav class="navBar">
+        <a href="#">Home</a>
+        <a href="stats">Stats</a>
+        <a href="about">About</a>
+      </nav>
+      <hr class="no-margin-above">
+			<div>
+        <div id="now-playing">
+        </div>
+				<hr />
+        <div class="trackList">
+          <h6 class="section-header">Recent Tracks</h6>
+          <div id="tracks"></div>
+        </div>
+				<br />
+			</div>
+    </div>
 	</div>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<script src="bundle.js"></script>
+	<script src="script.js"></script>
 </body>
 </html>
