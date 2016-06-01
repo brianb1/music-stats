@@ -19,20 +19,23 @@ const url = (page, num) =>
     + `&api_key=9cec0534e60b827aab0ae1b3e91baf82`
     + `&format=json`
 
-const fetchTracks = (page, num, callback) =>
+const fetchTracks = (page, num) =>
   fetch(url(page, num))
     .then(result => result.json())
-    .then(json => json.recenttracks.track)
+    .then(({recenttracks}) => recenttracks.track)
 
-const fetchRecentTracks = page => fetchTracks(page, 20).then(tracks =>
-  tracks.slice(1).forEach(({url, name, artist, image}) => {
-    $("#tracks").innerHTML += `
-      <a class="track" href=${url} target="_blank">
-        <h5>${name} by ${artist['#text']}</h5>
-        <img src=${image[image.length > 1 ? 1 : 0]['#text']}>
-      </a>`
+const fetchRecentTracks = page =>
+  fetchTracks(page, 20).then(tracks => {
+    $("#tracks").innerHTML +=
+      tracks.slice(1)
+        .map(({url, name, artist, image}) => `
+          <a class="track" href=${url} target="_blank">
+            <h5>${name} by ${artist['#text']}</h5>
+            <img src=${image[image.length > 1 ? 1 : 0]['#text']}>
+          </a>`)
+        .join('')
     state.loading = false
-  }))
+  })
 
 
 // Script
