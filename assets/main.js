@@ -1,40 +1,32 @@
-// music-stats
-// by James Vaughan
+---
+---
 
-
-// State
-
-// Initial state
 const state = {
   page: 1,
   loading: false
 }
 
-
-// Functions
-
 // Shorthand function for convenience
 const $ = selector => document.querySelector(selector)
 
-// Construct a url for the given page and number of tracks
-const url = (pageNum, numTracks) =>
+const url = pageNum =>
   `http://ws.audioscrobbler.com/2.0/?`
     + `method=user.getRecentTracks`
-    + `&limit=${numTracks}`
+    + `&limit=20`
     + `&page=${pageNum}`
     + `&user=magicjamesv`
     + `&api_key=9cec0534e60b827aab0ae1b3e91baf82`
     + `&format=json`
 
 // Get the pageNumth page of numTracks recent tracks
-const fetchTracks = (pageNum, numTracks) =>
-  fetch(url(pageNum, numTracks))
+const fetchTracks = pageNum =>
+  fetch(url(pageNum))
     .then(result => result.json())
     .then(({recenttracks}) => recenttracks.track)
 
 // Get the next 20 tracks and append them to the document
 const fetchRecentTracks = page =>
-  fetchTracks(page, 20)
+  fetchTracks(page)
     .then(tracks => {
       $("#tracks").innerHTML +=
         tracks
@@ -48,9 +40,6 @@ const fetchRecentTracks = page =>
       state.loading = false
     })
 
-
-// Script
-
 // Infinite scroll
 onscroll = () => {
   if (!state.loading && (innerHeight + scrollY) >= document.body.offsetHeight) {
@@ -63,7 +52,7 @@ onscroll = () => {
 fetchRecentTracks(1)
 
 // Get and display the currently playing or latest played track
-fetchTracks(1, 1).then(([{name, artist, album, image}]) =>
+fetchTracks(1).then(([{name, artist, album, image}]) =>
   $("#now-playing").innerHTML = `
     <div class="nine columns">
       <h4 style="margin-bottom: 10">${name}</h4>
